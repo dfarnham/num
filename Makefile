@@ -17,7 +17,7 @@ $(OBJS): $(SRCS)
 
 test: spotless all
 	@ECHO "-~-~-~-~-~-~-~-~TEST~-~-~-~-~-~-~-~-~-~-"
-	@./$(EXE) 10
+	@./$(EXE) -u16 d83cdf55
 
 clean:
 	$(RM) $(OBJS)
