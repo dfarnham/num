@@ -23,7 +23,7 @@ int     main         (int, char *[]  );
 void    usage        (const char *   );
 
 // returns 0 if the utf8 char is invalid
-// returns the number of bytes representing the utf8 char if valid
+// returns a number [1,4] representing the number of bytes in the valid utf8 char
 int
 validateUTF8(unsigned char *ptr) {
     int n = UTF8CharSize(ptr);
@@ -34,10 +34,10 @@ validateUTF8(unsigned char *ptr) {
     return n;
 }
 
-// returns the number of bytes representing the utf8 char
+// returns the number of bytes representing the utf8 char [1,4]
 int
 UTF8CharSize(unsigned char *ptr) {
-    int num;
+    int num = 1;
 
     if (*ptr >= 0xf0) {
         num = 4;
@@ -45,8 +45,6 @@ UTF8CharSize(unsigned char *ptr) {
         num = 3;
     } else if (*ptr >= 0xc0) {
         num = 2;
-    } else {
-        num = 1;
     }
 
     return num;
