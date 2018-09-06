@@ -66,10 +66,14 @@ main(int argc, char *argv[]) {
         { NULL   , 0                 , NULL ,  0  }
     };
 
+    /*
+     * Each option branch parses it's form of valid input and sets the value of integer 'n'
+     *
+     * Then 'n' is output in all formats
+     */
     int opt = 0, outputResults = 0;
     while ((opt = getopt_long_only(argc, argv, "hd:b:x:u:U:c:", longopts, NULL)) != -1) {
-        int n = 0;
-        int base = 0;
+        int n = 0;  // assigned by each option then output in all forms
         int bits = sizeof(n)*8;
         int skippedLeadingZeros = 0;
         char *ptr = NULL;
@@ -211,6 +215,7 @@ main(int argc, char *argv[]) {
                     exit(0);
             }
         } else { // Binary, Octal, Hex, Decimal input
+            int base = 0;
             char buf[BUFSIZ];
             buf[0] = '\0';
 
@@ -227,12 +232,12 @@ main(int argc, char *argv[]) {
                 }
             }
 
+            // ptr starts with "0" for Octal, "0x" for Hex
             strcat(buf, ptr);
 
-            // strtol() handles Base-[10,8,16] with "base==0" and correct form of ptr
-            // ptr starts with "0" for Octal, "0x" for Hex
+            // these forms aren't interesting and are handled by strtol() which
+            // internally converts Base-[8,10,16] with "base==0" and correct form of input
             n = (int)strtol(buf, NULL, base);
-            //printf("n = %d\n", n);
         }
 
         /* ********************************************************* */
@@ -275,7 +280,7 @@ main(int argc, char *argv[]) {
             printf("%02x %02x %02x %02x", n>>18 | 0xf0 ,(n>>12 & 0x3f) | 0x80 ,(n>>6 & 0x3f) | 0x80, (n & 0x3f) | 0x80);
         }
 
-        printf("\t(UTF-8 Char) ");
+        printf("\t(UTF-8 Char) "); // may or may not be visble on output btw
         if (n >= 0 && n <= 0x7f) {
             printf("%c", n);
         } else if (n >= 0x80 && n <= 0x7ff) {
@@ -287,7 +292,6 @@ main(int argc, char *argv[]) {
         }
 
         // Output UTF-16
-        //
         if (n >= 0x10000 && n <= 0x10ffff) {
             n -= 0x10000;
             printf("\t(UTF-16) %04x %04x", (n>>10) + 0xd800, (n & 0x3ff) + 0xdc00);
