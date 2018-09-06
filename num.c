@@ -72,10 +72,8 @@ main(int argc, char *argv[]) {
      */
     int opt = 0, outputResults = 0;
     while ((opt = getopt_long_only(argc, argv, "hd:b:x:u:U:c:", longopts, NULL)) != -1) {
-        int n = 0;  // assigned by each option then output in all forms
-        int bits = sizeof(n)*8;
-        int skippedLeadingZeros = 0;
-        char *ptr = NULL;
+        int   n   = 0;    // assigned by each option then output in all forms
+        char *ptr = NULL; // optarg
 
         switch (opt) {
             case 0: break;
@@ -245,6 +243,8 @@ main(int argc, char *argv[]) {
         printf("(Dec) %d\t(Oct) %o\t(Hex) %x", n, n, n);
 
         // Output Base-2
+        int bits = sizeof(n)*8;
+        int skippedLeadingZeros = 0;
         for (int j = bits-1; j >= 0; --j) {
             if (!skippedLeadingZeros) {
                 if (n & (1<<j)) {
