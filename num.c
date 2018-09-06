@@ -67,9 +67,8 @@ main(int argc, char *argv[]) {
     };
 
     /*
-     * Each option branch parses it's form of valid input and sets the value of integer 'n'
-     *
-     * Then 'n' is output in all formats
+     * each option branch parses its form of valid input and sets
+     * the value of integer 'n', followed by displaying all formats
      */
     int opt = 0, outputResults = 0;
     while ((opt = getopt_long_only(argc, argv, "hd:b:x:u:U:c:", longopts, NULL)) != -1) {
