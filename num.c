@@ -240,7 +240,7 @@ main(int argc, char *argv[]) {
         /* ********************************************************* */
 
         // Output Base-[10,8,16]
-        printf("(Dec) %d\t(Oct) %o\t(Hex) %x", n, n, n);
+        printf("(Dec) %u\t(Oct) %o\t(Hex) %x", n, n, n);
 
         // Output Base-2
         int bits = sizeof(n)*8;
