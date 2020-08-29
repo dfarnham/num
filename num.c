@@ -336,6 +336,9 @@ usage(const char *prog) {
 
     fprintf(stderr, "  UTF-16:\n");
     fprintf(stderr, "\tnum -[U|u16] d83cdf7a\n");
-    fprintf(stderr, "\t(Dec) 127866  (Oct) 371572  (Hex) 1f37a  (Bin[17]) 11111001101111010  (UTF-8) f0 9f 8d ba  (UTF-16) d83c df7a\n");
-}
+    fprintf(stderr, "\t(Dec) 127866  (Oct) 371572  (Hex) 1f37a  (Bin[17]) 11111001101111010  (UTF-8) f0 9f 8d ba  (UTF-16) d83c df7a\n\n");
 
+    fprintf(stderr, "  Char:\n");
+    fprintf(stderr, "\tnum -c 🍺\n");
+    fprintf(stderr, "\t(Dec) 127866 (Oct) 371572 (Hex) 1f37a (Bin[17]) 11111001101111010 (UTF-8) f0 9f 8d ba (UTF-8 Char) 🍺(UTF-16) d83c df7a\n");
+}
