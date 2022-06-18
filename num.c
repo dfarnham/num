@@ -139,7 +139,7 @@ main(int argc, char *argv[]) {
 
                 // break the input arg into its 2 hex components
                 // 4 chars into "b", 4 chars into "a" (note, "a" can be < 4)
-                strncpy(a, ptr, len - 4);
+                memcpy(a, ptr, len - 4);
                 a[len - 4] = '\0';
 
                 strcpy(b, ptr + len - 4);
